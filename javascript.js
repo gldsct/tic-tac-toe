@@ -17,7 +17,12 @@ function GameBoard() {
         }
     };
 
-    return { markGridSpace };
+    const printGrid = function () {
+        let markedGrid = board.map((row) => row.map((gridSpace) => gridSpace.getValue()));
+        console.log(markedGrid);
+    };
+
+    return { markGridSpace, printGrid };
 }
 
 function GridSpace() {
@@ -59,8 +64,13 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
 
     const playRound = function (row, column) {
         board.markGridSpace(getCurrentPlayer().marker, row, column);
+        board.printGrid();
         switchPlayer();
     };
 
+    board.printGrind();
+
     return { getCurrentPlayer, playRound };
 }
+
+game = GameLogic();
