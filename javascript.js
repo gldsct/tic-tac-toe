@@ -9,6 +9,15 @@ function GameBoard() {
             board[i].push(GridSpace());
         }
     }
+
+    const markGridSpace = function(playerMarker, row, column) {
+        if (board[row][column].getValue() === 0) {
+            board[row][column].markSpace(playerMarker);
+            console.log(`Row: ${row} / Column: ${column}, marked with "${playerMarker}" marker.`);
+        }
+    };
+
+    return { markGridSpace };
 }
 
 function GridSpace() {
@@ -49,7 +58,7 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
     };
 
     const playRound = function (row, column) {
-        console.log(`${row}/${column} marked with "${getCurrentPlayer().marker}"`);
+        board.markGridSpace(getCurrentPlayer().marker, row, column);
         switchPlayer();
     };
 
