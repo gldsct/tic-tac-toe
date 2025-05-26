@@ -23,7 +23,11 @@ function GameBoard() {
         return(markedGrid);
     };
 
-    return { markGridSpace, printGrid };
+    const getBoard = function () {
+        return board;
+    };
+
+    return { markGridSpace, printGrid, getBoard };
 }
 
 function GridSpace() {
@@ -130,7 +134,49 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
     
     console.log(board.printGrid());
     
-    return { getCurrentPlayer, playRound };
+    return { getCurrentPlayer, playRound, getBoard: board.getBoard };
 }
 
-game = GameLogic();
+function DisplayBoard() {
+    let game = GameLogic();
+    const gamePlayer = document.querySelector(".game-player");
+    const gameGrid = document.querySelector(".game-grid");
+
+    const updateBoard = function () {
+        gameGrid.textContent = "";
+        const board = game.getBoard();
+        const currentPlayer = game.getCurrentPlayer();
+
+        gamePlayer.textContent = `${currentPlayer.name}'s`;
+        board.forEach((row, rowIndex) => {
+            const gameGridRow = document.createElement("div");
+            gameGridRow.classList.add("game-grid-row");
+            row.forEach((cell, cellIndex) => {
+                const gameGridCell = document.createElement("button");
+                gameGridCell.classList.add("game-grid-cell");
+                gameGridCell.dataset.gameGridRow = rowIndex;
+                gameGridCell.dataset.gameGridColumn = cellIndex;
+                gameGridCell.textContent = cell.getValue();
+                gameGridRow.appendChild(gameGridCell);
+            });
+            gameGrid.appendChild(gameGridRow);
+        });
+    };
+
+    function buttonClickHandler(event) {
+        const selectedRow = event.target.dataset.gameGridRow;
+        const selectedColumn = event.target.dataset.gameGridColumn;
+
+        if (!selectedRow || !selectedColumn) {
+            return;
+        }
+        game.playRound(selectedRow, selectedColumn);
+        updateBoard();
+    }
+
+    gameGrid.addEventListener("click", buttonClickHandler);
+
+    updateBoard();
+}
+
+DisplayBoard();
