@@ -139,8 +139,8 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
     return { getCurrentPlayer, playRound, getBoard: board.getBoard, getGameState };
 }
 
-function DisplayBoard() {
-    let game = GameLogic();
+function DisplayBoard(playerOne, playerTwo) {
+    let game = GameLogic(playerOne, playerTwo);
     const gamePlayer = document.querySelector(".game-player");
     const gameGrid = document.querySelector(".game-grid");
     const restartButton = document.querySelector(".restart-button");
@@ -150,7 +150,7 @@ function DisplayBoard() {
         const board = game.getBoard();
         const currentPlayer = game.getCurrentPlayer();
 
-        gamePlayer.textContent = `${currentPlayer.name}'s`;
+        gamePlayer.textContent = `${currentPlayer.name}`;
         board.forEach((row, rowIndex) => {
             const gameGridRow = document.createElement("div");
             gameGridRow.classList.add("game-grid-row");
@@ -192,4 +192,20 @@ function DisplayBoard() {
     updateBoard();
 }
 
-DisplayBoard();
+function ModalDisplay() {
+    let modal = document.querySelector(".modal");
+    let modalOverlay = document.querySelector(".overlay");
+    let modalSubmitButton = document.querySelector(".modal-submit-button");
+
+    modalSubmitButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        let playerOneName = document.querySelector("#player-one-name").value;
+        let playerTwoName = document.querySelector("#player-two-name").value;
+        DisplayBoard(playerOneName, playerTwoName);
+
+        modal.classList.add("hidden");
+        modalOverlay.classList.add("hidden");
+});
+}
+
+ModalDisplay();

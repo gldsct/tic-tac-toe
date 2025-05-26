@@ -12,10 +12,29 @@
 
     <body>
         <div class = "game-container">
-            <p class = "game-turn">It is currently: <span class = "game-player"></span> turn. Make a move!</p>
+            <p class = "game-turn">Current Player: <span class = "game-player"></span></p>
             <div class = "game-grid"></div>
             <button class = "restart-button">Restart Game</button>
         </div>
+
+        <div class = "modal input-modal">
+            <h3>Enter Player Names:</h3>
+            <form action = "" method = "get" class = "modal-form">
+                <div class = "player-name-input">
+                    <label for = "player-one-name">Player 1 Name:</label>
+                    <input type = "text" id = "player-one-name" name = "player-one-name">
+                </div>
+                <div class = "player-name-input">
+                    <label for = "player-two-name">Player 2 Name:</label>
+                    <input type = "text" id = "player-two-name" name = "player-two-name">
+                </div>
+                <div class = "modal-buttons">
+                    <button type = "submit" class = "modal-submit-button">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class = "overlay"></div>
+
     </body>
 
 </html>
