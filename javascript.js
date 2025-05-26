@@ -58,13 +58,18 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
     ];
 
     let currentPlayer = players[0];
-
+    
     const getCurrentPlayer = function () {
         return currentPlayer;
     };
-
+    
     const switchPlayer = function () {
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+    };
+    
+    let gameState = true;
+    const getGameState = function () {
+        return gameState;
     };
 
     const playRound = function (row, column) {
@@ -105,13 +110,11 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
     
             if (rowResults.filter((cell) => cell === "xxx").length || columnResults.filter((cell) => cell === "xxx").length || diagonalResults.filter((cell) => cell === "xxx").length) {
                 console.log("Player 1 wins!");
-                game = GameLogic();
-                return;
+                return gameState = false;
             }
             if (rowResults.filter((cell) => cell === "ooo").length || columnResults.filter((cell) => cell === "ooo").length || diagonalResults.filter((cell) => cell === "ooo").length) {
                 console.log("Player 2 wins!");
-                game = GameLogic();
-                return;
+                return gameState = false;
             }
             let anyZeros = 0;
             gridWithValues.forEach((row) => row.forEach((cell) => {
@@ -121,8 +124,7 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
             }));
             if (anyZeros === 0) {
                 console.log("It was a tie.");
-                game = GameLogic();
-                return;
+                return gameState = false;
             }
         })();
 
@@ -134,7 +136,7 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
     
     console.log(board.printGrid());
     
-    return { getCurrentPlayer, playRound, getBoard: board.getBoard };
+    return { getCurrentPlayer, playRound, getBoard: board.getBoard, getGameState };
 }
 
 function DisplayBoard() {
@@ -170,8 +172,13 @@ function DisplayBoard() {
         if (!selectedRow || !selectedColumn) {
             return;
         }
-        game.playRound(selectedRow, selectedColumn);
-        updateBoard();
+        if (game.getGameState()) {
+            game.playRound(selectedRow, selectedColumn);
+            updateBoard();
+        }
+        else {
+            alert("The game is already over. What are you trying to do?");
+        }
     }
 
     gameGrid.addEventListener("click", buttonClickHandler);
