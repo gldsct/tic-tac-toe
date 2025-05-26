@@ -45,3 +45,83 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* End of CSS Resets */
+
+/* General Layout Styles */
+
+body {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #C9CCC9;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    height: 65%;
+    width: 400px;
+    padding: 1rem 2rem;
+    border-radius: 16px;
+    background: #357EB3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* End of General Layout Styles */
+
+/* Header Styles */
+
+.game-turn {
+    color: #BF9773;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.game-turn > .game-player {
+    color: #C9CCC9;
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+/* End of Header Styles */
+
+/* Game Grid Layout Styles */
+
+.game-grid {
+    width: 100%;
+}
+
+.game-grid-row {
+    /* outline: 2px solid pink; */
+    margin-bottom: 0.25rem;
+    display: flex;
+    gap: 0.25rem;
+}
+
+.game-grid-row > * {
+    flex: auto;
+    height: 6rem;
+    color: #C9CCC9;
+    background-color: #699F8C;
+    border: 1px solid #BF9773;
+    border-radius: 12px;
+    font-size: 2rem;
+}
+
+/* End of Game Grid Layout Styles */
+
+/* Restart Button Styles */
+
+.restart-button {
+    color: #C9CCC9;
+    background-color: #699F8C;
+    border-radius: 12px;
+    border: 1px solid #BF9773;
+    padding: 0.25rem 2rem;
+}
+
+/* End of Restart Button Styles */
