@@ -143,6 +143,7 @@ function DisplayBoard() {
     let game = GameLogic();
     const gamePlayer = document.querySelector(".game-player");
     const gameGrid = document.querySelector(".game-grid");
+    const restartButton = document.querySelector(".restart-button");
 
     const updateBoard = function () {
         gameGrid.textContent = "";
@@ -182,6 +183,11 @@ function DisplayBoard() {
     }
 
     gameGrid.addEventListener("click", buttonClickHandler);
+    
+    restartButton.addEventListener("click", () => {
+        gameGrid.removeEventListener("click", buttonClickHandler);
+        DisplayBoard();
+    });
 
     updateBoard();
 }
