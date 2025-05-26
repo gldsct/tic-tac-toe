@@ -19,7 +19,7 @@ function GameBoard() {
 
     const printGrid = function () {
         let markedGrid = board.map((row) => row.map((gridSpace) => gridSpace.getValue()));
-        console.log(markedGrid);
+        return(markedGrid);
     };
 
     return { markGridSpace, printGrid };
@@ -44,11 +44,11 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
     const players = [
         {
             name: playerOne,
-            marker: 1,
+            marker: "x",
         }, 
         {
             name: playerTwo,
-            marker: 2,
+            marker: "o",
         }
     ];
 
@@ -64,12 +64,69 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
 
     const playRound = function (row, column) {
         board.markGridSpace(getCurrentPlayer().marker, row, column);
-        board.printGrid();
+        const gridWithValues = board.printGrid();
+        console.log(gridWithValues);
+
+        // Check for game winner after each move
+        (function () {
+            let rowResults = [];
+            gridWithValues.forEach((row) => {
+                let rowSum = row.reduce((cell, sum) => {
+                    return cell + sum;
+                });
+                rowResults.push(rowSum);
+            });
+    
+            let columnResults = [];
+            for (let i = 0; i < 3; i++) {
+                let columnSum = "";
+                for (let j = 0; j < 3; j++) {
+                    columnSum += gridWithValues[j][i]; 
+                }
+                columnResults.push(columnSum);
+            }
+    
+            let diagonalResults = [];
+            let firstDiagonalSum = "";
+            for (let i = 0; i < 3; i++) {
+                firstDiagonalSum += gridWithValues[i][i];
+            }
+            diagonalResults.push(firstDiagonalSum);
+            let secondDiagonalSum = "";
+            for (let i = 2; i >= 0; i--) {
+                secondDiagonalSum += gridWithValues[i][2-i];
+            }
+            diagonalResults.push(secondDiagonalSum);
+    
+            if (rowResults.filter((cell) => cell === "xxx").length || columnResults.filter((cell) => cell === "xxx").length || diagonalResults.filter((cell) => cell === "xxx").length) {
+                console.log("Player 1 wins!");
+                game = GameLogic();
+                return;
+            }
+            if (rowResults.filter((cell) => cell === "ooo").length || columnResults.filter((cell) => cell === "ooo").length || diagonalResults.filter((cell) => cell === "ooo").length) {
+                console.log("Player 2 wins!");
+                game = GameLogic();
+                return;
+            }
+            let anyZeros = 0;
+            gridWithValues.forEach((row) => row.forEach((cell) => {
+                if (cell === 0) {
+                    anyZeros++;
+                }
+            }));
+            if (anyZeros === 0) {
+                console.log("It was a tie.");
+                game = GameLogic();
+                return;
+            }
+        })();
+
         switchPlayer();
     };
-
-    board.printGrind();
-
+    
+    
+    console.log(board.printGrid());
+    
     return { getCurrentPlayer, playRound };
 }
 
