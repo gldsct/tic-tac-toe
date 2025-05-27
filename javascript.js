@@ -11,7 +11,7 @@ function GameBoard() {
     }
 
     const markGridSpace = function(playerMarker, row, column) {
-        if (board[row][column].getValue() === 0) {
+        if (board[row][column].getValue() === "") {
             board[row][column].markSpace(playerMarker);
             console.log(`Row: ${row} / Column: ${column}, marked with "${playerMarker}" marker.`);
             return true;
@@ -31,7 +31,7 @@ function GameBoard() {
 }
 
 function GridSpace() {
-    let gridValue = 0;
+    let gridValue = "";
 
     const getValue = function () {
         return gridValue;
@@ -118,7 +118,7 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
             }
             let anyZeros = 0;
             gridWithValues.forEach((row) => row.forEach((cell) => {
-                if (cell === 0) {
+                if (cell === "") {
                     anyZeros++;
                 }
             }));
