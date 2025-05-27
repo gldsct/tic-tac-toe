@@ -103,7 +103,7 @@ body {
 }
 
 .game-grid-row > * {
-    flex: auto;
+    flex: 1 1 30%;
     height: 6rem;
     color: #C9CCC9;
     background-color: #699F8C;
