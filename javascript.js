@@ -174,13 +174,27 @@ function DisplayBoard(playerOne, playerTwo) {
             return;
         }
         if (game.getGameState()) {
+            let gameWinner = game.getCurrentPlayer();
             game.playRound(selectedRow, selectedColumn);
             updateBoard();
+            if (!game.getGameState()) {
+                gameOver(gameWinner);
+            }
         }
         else {
             alert("The game is already over. What are you trying to do?");
         }
     }
+
+    const gameOver = function (gameWinner) {
+        let winnerModal = document.querySelector(".winner-modal");
+        let modalOverlay = document.querySelector(".overlay");
+        let showGameWinner = document.querySelector(".game-winner");
+
+        winnerModal.classList.remove("hidden");
+        modalOverlay.classList.remove("hidden");
+        showGameWinner.textContent = gameWinner.name;
+    };
 
     gameGrid.addEventListener("click", buttonClickHandler);
     
@@ -193,7 +207,7 @@ function DisplayBoard(playerOne, playerTwo) {
 }
 
 function ModalDisplay() {
-    let modal = document.querySelector(".modal");
+    let inputModal = document.querySelector(".input-modal");
     let modalOverlay = document.querySelector(".overlay");
     let modalSubmitButton = document.querySelector(".modal-submit-button");
 
@@ -203,7 +217,7 @@ function ModalDisplay() {
         let playerTwoName = document.querySelector("#player-two-name").value;
         DisplayBoard(playerOneName, playerTwoName);
 
-        modal.classList.add("hidden");
+        inputModal.classList.add("hidden");
         modalOverlay.classList.add("hidden");
 });
 }

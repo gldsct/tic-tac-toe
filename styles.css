@@ -173,6 +173,20 @@ button {
     padding: 0.25rem 0.5rem;
 }
 
+/* Winner Modal Styles */
+
+.winner-modal {
+    top: 35vh;
+    min-height: 75px;
+    width: 300px;
+}
+
+.game-turn > .game-winner {
+    color: #699F8C;
+    text-decoration: underline;
+    font-weight: normal;
+}
+
 /* End of Modal Styles */
 
 /* Restart Button Styles */
