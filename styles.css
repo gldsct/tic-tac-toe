@@ -148,14 +148,6 @@ body {
     gap: 2rem;
 }
 
-button {
-    background-color: #658E58;
-    color: #EFD6B5;
-    border: 2px solid #722932;
-    border-radius: 12px;
-    padding: 0.25rem 1rem;
-}
-
 .overlay {
     position: fixed;
     top: 0;
@@ -191,7 +183,7 @@ button {
 
 /* Restart Button Styles */
 
-.restart-button {
+button {
     color: #C9CCC9;
     background-color: #699F8C;
     border-radius: 12px;
