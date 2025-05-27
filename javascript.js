@@ -49,11 +49,11 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
     const players = [
         {
             name: playerOne,
-            marker: "x",
+            marker: "X",
         }, 
         {
             name: playerTwo,
-            marker: "o",
+            marker: "O",
         }
     ];
 
@@ -108,11 +108,11 @@ function GameLogic(playerOne = "Player One", playerTwo = "Player Two") {
             }
             diagonalResults.push(secondDiagonalSum);
     
-            if (rowResults.filter((cell) => cell === "xxx").length || columnResults.filter((cell) => cell === "xxx").length || diagonalResults.filter((cell) => cell === "xxx").length) {
+            if (rowResults.filter((cell) => cell === "XXX").length || columnResults.filter((cell) => cell === "XXX").length || diagonalResults.filter((cell) => cell === "XXX").length) {
                 console.log("Player 1 wins!");
                 return gameState = false;
             }
-            if (rowResults.filter((cell) => cell === "ooo").length || columnResults.filter((cell) => cell === "ooo").length || diagonalResults.filter((cell) => cell === "ooo").length) {
+            if (rowResults.filter((cell) => cell === "OOO").length || columnResults.filter((cell) => cell === "OOO").length || diagonalResults.filter((cell) => cell === "OOO").length) {
                 console.log("Player 2 wins!");
                 return gameState = false;
             }
